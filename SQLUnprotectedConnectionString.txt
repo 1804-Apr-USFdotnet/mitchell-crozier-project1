@@ -1,0 +1,1 @@
+metadata=res://*/ProjectZero.csdl|res://*/ProjectZero.ssdl|res://*/ProjectZero.msl;provider=System.Data.SqlClient;provider connection string="data source=class.cehorp90ltxb.us-east-2.rds.amazonaws.com;initial catalog=ProjectZero;persist security info=True;user id=sqladmin;password=***********;MultipleActiveResultSets=True;App=EntityFramework"
