@@ -10,6 +10,11 @@ namespace ServiceInterfaces
     public interface IRestaurantService
     {
         List<RestaurantInfo> GetAllRestaurantInfo();
+        RestaurantInfo GetRestaurantById(int restId);
+        void AddRestaurant(RestaurantInfo restaurant);
+        void DeleteRestaurant(RestaurantInfo restaurant);
+        void DeleteRestaurantById(int restaurantId);
+        void UpdateRestaurant(RestaurantInfo restaurant);
         Dictionary<RestaurantInfo, double> TopThreeRatedRestaurants();
         List<RestaurantInfo> SearchByName(string name);
         Dictionary<ReviewerInfo, RestaurantInfo> AllReviewsForARestauraunt(string name);

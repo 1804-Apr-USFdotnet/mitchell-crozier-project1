@@ -22,8 +22,32 @@ namespace Services
         }
         public List<RestaurantInfo> GetAllRestaurantInfo()
         {
-           
             return restaurantRepository.getAll().ToList();
+        }
+
+        public RestaurantInfo GetRestaurantById(int restId)
+        {
+            return restaurantRepository.GetRestaurantById(restId);
+        }
+
+        public void AddRestaurant(RestaurantInfo restaurant)
+        {
+            restaurantRepository.AddRestaurant(restaurant);
+        }
+
+        public void DeleteRestaurant(RestaurantInfo restaurant)
+        {
+            restaurantRepository.DeleteRestaurant(restaurant);
+        }
+
+        public void DeleteRestaurantById(int restaurantId)
+        {
+            restaurantRepository.DeleteRestaurantById(restaurantId);
+        }
+
+        public void UpdateRestaurant(RestaurantInfo restaurant)
+        {
+            restaurantRepository.UpdateRestaurant(restaurant);
         }
 
         public Dictionary<RestaurantInfo, double> TopThreeRatedRestaurants()
@@ -35,6 +59,7 @@ namespace Services
             
             return results;
         }
+
 
         public List<RestaurantInfo> SearchByName(string name)
         {
@@ -50,8 +75,6 @@ namespace Services
             var reviews = reviewerRepository.getAll();
             var allReviews = new AllReviewsSingleRestauraunt();
             return allReviews.GetAllReviews(name, restaurants, reviews);
-            
-
         }
     }
 
