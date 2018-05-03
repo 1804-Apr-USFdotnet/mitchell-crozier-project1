@@ -27,7 +27,6 @@ namespace Respositories
             var rest = getAll().SingleOrDefault(x => x.restaurantId == restId);
             var restFind = _context.RestaurantInfoes.Find(restId);
             return rest;
-
         }
         public List<int> ConvertNameIntoId(string restaurantName)
         {

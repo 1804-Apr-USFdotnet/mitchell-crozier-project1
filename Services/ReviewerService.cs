@@ -11,16 +11,41 @@ namespace Services
 {
     public class ReviewerService : IReviewService
     {
-        private IReviewerRepository reviewRepository;
+        private readonly IReviewerRepository _reviewRepository;
 
         public ReviewerService(IReviewerRepository repository)
         {
-            reviewRepository = repository;
+            _reviewRepository = repository;
         }
         public List<ReviewerInfo> GetAllReviewerInfo()
         {
-            Console.WriteLine(reviewRepository.getAll());
-            return reviewRepository.getAll().ToList();
+            Console.WriteLine(_reviewRepository.getAll());
+            return _reviewRepository.getAll().ToList();
+        }
+
+        public ReviewerInfo GetReviewById(int reviewId)
+        {
+            return _reviewRepository.GetReviewById(reviewId);
+        }
+
+        public void AddReview(ReviewerInfo review)
+        {
+            _reviewRepository.AddReview(review);
+        }
+
+        public void DeleteReview(ReviewerInfo review)
+        {
+            _reviewRepository.DeleteReview(review);
+        }
+
+        public void DeleteReviewById(int reviewId)
+        {
+            _reviewRepository.DeleteReviewById(reviewId);
+        }
+
+        public void UpdateReview(ReviewerInfo review)
+        {
+            _reviewRepository.UpdateReview(review);
         }
     }
 }
