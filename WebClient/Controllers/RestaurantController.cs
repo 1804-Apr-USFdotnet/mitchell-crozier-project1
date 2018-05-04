@@ -58,6 +58,8 @@ namespace WebClient.Controllers
         {
             try
             {
+                int newId = _restaurantService.GetAllRestaurantInfo().Select(x => x.restaurantId).Max() + 1;
+                restaurant.restaurantId = newId;
                 _restaurantService.AddRestaurant(restaurant);
                 // log that it worked
                 _loggingService.Log("Added restaurant with an id of: " + restaurant.restaurantId + " and of name:" + restaurant.RestaurantName);
@@ -70,7 +72,6 @@ namespace WebClient.Controllers
                 return View();
             }
         }
-
         
         public ActionResult Delete(int id)
         {
@@ -85,6 +86,8 @@ namespace WebClient.Controllers
                 return View();
             }
         }
+
+       
 
     }
 }

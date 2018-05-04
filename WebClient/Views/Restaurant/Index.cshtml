@@ -1,39 +1,49 @@
 ﻿@model IEnumerable<DbFirst.RestaurantInfo>
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<div>
-    <table style="border:2px solid; border-collapse:collapse">
-        <thead>
-        <tr>
-            <th>Name </th>
-            <th>Address </th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var rest in Model)
-        {
-            <tr style="border:2px solid black">
-                <td>@rest.RestaurantName</td>
-                <td>@rest.City</td>
-                <td>@Html.ActionLink("Details", "Details", new { id = rest.restaurantId })</td>
-                <td>@Html.ActionLink("Update", "Update", new { id = rest.restaurantId })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { id = rest.restaurantId })</td>
-
-            </tr>
-        }
-        </tbody>
-    </table>
+<div class="row mt-5">
+@foreach(var rest in Model){
+    <div class="col-md-4 col-sm-6 my-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@rest.RestaurantName</h5>
+                <p class="card-text">@rest.City</p>
+                @Html.ActionLink("Details", "Details", new { id = rest.restaurantId })
+                @Html.ActionLink("Update", "Update", new { id = rest.restaurantId })
+                @Html.ActionLink("Delete", "Delete", new { id = rest.restaurantId })
+            </div>
+        </div>
+    </div>
+    }
 </div>
-</body>
-</html>
+
+
+
+
+@* *@
+@* <div> *@
+@*     <table style="border:2px solid; border-collapse:collapse"> *@
+@*         <thead> *@
+@*         <tr> *@
+@*             <th>Name </th> *@
+@*             <th>Address </th> *@
+@*         </tr> *@
+@*         </thead> *@
+@*         <tbody> *@
+@*         @foreach (var rest in Model) *@
+@*         { *@
+@*             <tr style="border:2px solid black"> *@
+@*                 <td>@rest.RestaurantName</td> *@
+@*                 <td>@rest.City</td> *@
+@*                 <td>@Html.ActionLink("Details", "Details", new { id = rest.restaurantId })</td> *@
+@*                 <td>@Html.ActionLink("Update", "Update", new { id = rest.restaurantId })</td> *@
+@*                 <td>@Html.ActionLink("Delete", "Delete", new { id = rest.restaurantId })</td> *@
+@* *@
+@*             </tr> *@
+@*         } *@
+@*         </tbody> *@
+@*     </table> *@
+@* </div> *@

@@ -1,41 +1,32 @@
 ﻿@model DbFirst.RestaurantInfo
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
 <body>
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(Model => Model.restaurantId);
-    @Html.EditorFor(Model => Model.restaurantId)<br />
+    @using (Html.BeginForm())
+    {        
 
-    @Html.LabelFor(Model => Model.RestaurantName);
-    @Html.EditorFor(Model => Model.RestaurantName, new { htmlattributes = new { placeholder = "Enter Name", required = "required" } })<br />
-    @Html.ValidationMessageFor(Model=>Model.RestaurantName)
+        @Html.LabelFor(Model => Model.RestaurantName);
+        @Html.EditorFor(Model => Model.RestaurantName, new { htmlattributes = new { placeholder = "Enter Name", required = "required" } })<br />
+        @Html.ValidationMessageFor(Model => Model.RestaurantName)
 
-    @Html.LabelFor(Model => Model.City);
-    @Html.EditorFor(Model => Model.City)<br />
+        @Html.LabelFor(Model => Model.City);
+        @Html.EditorFor(Model => Model.City)<br />
 
-    @Html.LabelFor(Model => Model.Street);
-    @Html.EditorFor(Model => Model.Street)<br />
+        @Html.LabelFor(Model => Model.Street);
+        @Html.EditorFor(Model => Model.Street)<br />
 
-    @Html.LabelFor(Model => Model.Description);
-    @Html.EditorFor(Model => Model.Description) <br />
+        @Html.LabelFor(Model => Model.Description);
+        @Html.EditorFor(Model => Model.Description) <br />
 
-    @Html.LabelFor(Model => Model.Email);
-    @Html.EditorFor(Model => Model.Email)<br />
+        @Html.LabelFor(Model => Model.Email);
+        @Html.EditorFor(Model => Model.Email)<br />
 
 
-    <input type="submit" value="Add" />
-}
-<div>
-</div>
+        <input type="submit" value="Add" />
+    }
+    <div>
+    </div>
 </body>
-</html>
+

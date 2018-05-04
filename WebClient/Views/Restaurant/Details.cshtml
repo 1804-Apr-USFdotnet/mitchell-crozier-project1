@@ -1,21 +1,21 @@
 ﻿@model DbFirst.RestaurantInfo
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
 <body>
-<div>
-    <section>
-        <h3>@Model.RestaurantName</h3>
-        <aside>@Model.Description</aside>
-    </section>
+<div class="row mt-5">
+        <div class="col-md-4 col-sm-6 my-2">
+            <div class="card">  
+                <div class="card-body">
+                    <h5 class="card-title">@Model.RestaurantName</h5>
+                    <p class="card-text">@Model.City</p>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text">@Model.Email</p>
+                    <button type="button" class="btn">@Html.ActionLink("Back", "Index")</button>
+                </div>
+            </div>
+        </div>
 </div>
 </body>
-</html>
+

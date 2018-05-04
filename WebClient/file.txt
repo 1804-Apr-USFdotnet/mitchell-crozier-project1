@@ -11,3 +11,5 @@
    at Respositories.RestaurantRepository.AddRestaurant(RestaurantInfo restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\Respositories\RestaurantRepository.cs:line 39
    at Services.RestaurantService.AddRestaurant(RestaurantInfo restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\Services\RestaurantService.cs:line 35
    at WebClient.Controllers.RestaurantController.Create(RestaurantInfo restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\WebClient\Controllers\RestaurantController.cs:line 48
+2018-05-04 09:54:26.2044|INFO|Services.LoggingService|Added restaurant with an id of: 0 and of name:JOHN CENA
+2018-05-04 09:57:00.7187|INFO|Services.LoggingService|Added restaurant with an id of: 101 and of name:john cena
