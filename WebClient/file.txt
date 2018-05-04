@@ -1,0 +1,13 @@
+2018-05-03 16:01:43.7544|INFO|Services.LoggingService|System.InvalidOperationException: No connection string named 'ProjectZeroDbContext' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Add(Object entity)
+   at System.Data.Entity.DbSet`1.Add(TEntity entity)
+   at Respositories.RestaurantRepository.AddRestaurant(RestaurantInfo restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\Respositories\RestaurantRepository.cs:line 39
+   at Services.RestaurantService.AddRestaurant(RestaurantInfo restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\Services\RestaurantService.cs:line 35
+   at WebClient.Controllers.RestaurantController.Create(RestaurantInfo restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\WebClient\Controllers\RestaurantController.cs:line 48

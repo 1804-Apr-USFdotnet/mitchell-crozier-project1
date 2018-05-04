@@ -1,33 +1,33 @@
-﻿using Autofac;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mime;
+using System.Web;
+using System.Web.Mvc;
+using Autofac;
+using Autofac.Integration.Mvc;
 using DbFirst;
-using Operations;
 using RepositoryInterfaces;
 using Respositories;
 using ServiceInterfaces;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Client
+namespace WebClient.App_Start
 {
-    class Bootstrapper
+    public class IoCConfig
     {
-        public static IContainer container;
+        //public static IContainer container;
 
-        public static IContainer RegisterTypes()
+        public static void RegisterTypes()
         {
             var builder = new ContainerBuilder();
 
-            //Shout out to my boi Michael 
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
+            //Shout out to my boi Michael 
             builder.RegisterType<ProjectZeroDbContext>().AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<LoggingService>().As<ILoggingService>().SingleInstance();
-
-            builder.RegisterType<InOut>().As<IInOut>().SingleInstance();
 
             builder.RegisterType<RestaurantRepository>().As<IRestaurantRepository>();
 
@@ -39,12 +39,10 @@ namespace Client
 
             //builder.RegisterType<Queries>().As<IQueries>();
 
-            //builder.RegisterType<Application>().As<IApplication>();
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
 
-            container = builder.Build();
-
-            return container;
 
         }
     }

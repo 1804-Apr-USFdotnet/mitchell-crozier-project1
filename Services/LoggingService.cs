@@ -29,5 +29,10 @@ namespace Services
             nlogger.Log(LogLevel.Info, e);
         }
 
+        public void Log(string message)
+        {
+            nlogger.Log(LogLevel.Info, message);
+        }
+
     }
 }
