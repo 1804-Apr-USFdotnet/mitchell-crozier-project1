@@ -102,37 +102,37 @@
 //            }
 //
 //        }
-//        private void SortIdAscending()
-//        {
-//            var results = _restaurantService.GetAllRestaurantInfo();
-//            var restaurantList = results.OrderBy(x => x.restaurantId);
-//
-//            inOut.Output(restaurantList);
-//        }
-//
-//        private void SortIdDescending()
-//        {
-//            var results = restaurantService.GetAllRestaurantInfo();
-//            var restaurantList = results.OrderByDescending(x => x.restaurantId);
-//
-//            inOut.Output(restaurantList);
-//        }
-//
-//        private void SortNameAscending()
-//        {
-//            var results = _restaurantRepository.GetAllRestaurantInfo();
-//            var restaurantList = results.OrderBy(x => x.RestaurantName);
-//
-//            inOut.Output(restaurantList);
-//        }
-//
-//        private void SortNameDescending()
-//        {
-//            var results = _restaurantRepository.GetAllRestaurantInfo();
-//            var restaurantList = results.OrderByDescending(x => x.RestaurantName);
-//
-//            inOut.Output(restaurantList);
-//        }
+        private void SortIdAscending()
+        {
+            var results = _restaurantService.GetAllRestaurantInfo();
+            var restaurantList = results.OrderBy(x => x.restaurantId);
+
+            inOut.Output(restaurantList);
+        }
+
+        private void SortIdDescending()
+        {
+            var results = restaurantService.GetAllRestaurantInfo();
+            var restaurantList = results.OrderByDescending(x => x.restaurantId);
+
+            inOut.Output(restaurantList);
+        }
+
+        private void SortNameAscending()
+        {
+            var results = _restaurantRepository.GetAllRestaurantInfo();
+            var restaurantList = results.OrderBy(x => x.RestaurantName);
+
+            inOut.Output(restaurantList);
+        }
+
+        private void SortNameDescending()
+        {
+            var results = _restaurantRepository.GetAllRestaurantInfo();
+            var restaurantList = results.OrderByDescending(x => x.RestaurantName);
+
+            inOut.Output(restaurantList);
+        }
 //
 //        private void TopThreeRatedRestaurants()
 //        {

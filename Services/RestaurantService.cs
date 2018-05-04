@@ -76,6 +76,26 @@ namespace Services
             var allReviews = new AllReviewsSingleRestauraunt();
             return allReviews.GetAllReviews(name, restaurants, reviews);
         }
+
+        public List<RestaurantInfo> SortIdAscending()
+        {
+            return restaurantRepository.getAll().OrderBy(x => x.restaurantId).ToList();
+        }
+
+        public List<RestaurantInfo> SortIdDescending()
+        {
+            return restaurantRepository.getAll().OrderByDescending(x => x.restaurantId).ToList();
+        }
+
+        public List<RestaurantInfo> SortNameAscending()
+        {
+            return restaurantRepository.getAll().OrderBy(x => x.RestaurantName).ToList();
+        }
+
+        public List<RestaurantInfo> SortNameDescending()
+        {
+            return restaurantRepository.getAll().OrderByDescending(x => x.RestaurantName).ToList();
+        }
     }
 
     

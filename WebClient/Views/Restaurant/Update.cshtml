@@ -5,31 +5,45 @@
 
 
 <body>
-    <div>
-        @using (Html.BeginForm())
-        {
-            @Html.LabelFor(Model => Model.restaurantId);
-            @Html.EditorFor(Model => Model.restaurantId)<br />
+    
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="row mt-5 d-flex">
+            <div class="col-xl-6 col-lg-8 col-md-10 m-auto my-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Update the Restaurant</h5>
+                        <h5 class="card-title">
+                            @Html.HiddenFor(@Model => Model.restaurantId)
 
-            @Html.LabelFor(Model => Model.RestaurantName);
-            @Html.EditorFor(Model => Model.RestaurantName, new { htmlattributes = new { placeholder = Model.RestaurantName, required = "required" } })<br />
-            @Html.ValidationMessageFor(Model => Model.RestaurantName)
-
-            @Html.LabelFor(Model => Model.City);
-            @Html.EditorFor(Model => Model.City)<br />
-
-            @Html.LabelFor(Model => Model.Street);
-            @Html.EditorFor(Model => Model.Street)<br />
-
-            @Html.LabelFor(Model => Model.Description);
-            @Html.EditorFor(Model => Model.Description) <br />
-
-            @Html.LabelFor(Model => Model.Email);
-            @Html.EditorFor(Model => Model.Email)<br />
-
-
-            <input type="submit" value="Add" />
-        }
+                            @Html.EditorFor(Model => Model.RestaurantName, new { htmlattributes = new { placeholder = "Enter Name", required = "required" } })<br />
+                            @Html.ValidationMessageFor(Model => Model.RestaurantName)
+                        </h5>
+                        <p class="card-text">
+                            @Html.EditorFor(Model => Model.City, new {htmlattributes = new {placeholder = "Enter City", required = "required"}})
+                            @Html.ValidationMessageFor(Model => Model.City)
+                        </p>
+                        <p class="card-text">
+                            @Html.EditorFor(Model => Model.Street, new {htmlattributes = new {placeholder = "Enter Street", required = "required"}})
+                            @Html.ValidationMessageFor(Model => Model.Street)
+                        </p>
+                        <p class="card-text">
+                            @Html.EditorFor(Model => Model.Description, new {htmlattributes = new {placeholder = "Enter Description", required = "required"}})
+                            @Html.ValidationMessageFor(Model => Model.Description)
+                        </p>
+                        <p class="card-text">
+                            @Html.EditorFor(Model => Model.Email, new {htmlattributes = new {placeholder = "Enter Email", required = "required"}})
+                            @Html.ValidationMessageFor(Model => Model.Email)
+                        </p>
+                        <button type="button" class="btn">@Html.ActionLink("Back", "Index")</button>
+                        <input type="submit" class="btn btn-success float-right" value="Add"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+}
 </body>
 

@@ -2,8 +2,23 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+<body>
+<div>
+    
+</div>
+<div class="row mt-5 d-flex">
+    <div class="col-xl-6 col-lg-8 col-md-10 m-auto">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Choose a sort method</h5>
+                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Id Ascending", "SortByAscendingId")</button>
+                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Id Descending", "SortByDescendingId")</button>
+                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Name Ascending", "SortByAscendingName")</button>
+                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Name Descending", "SortByDescendingName")</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row mt-5">
 @foreach(var rest in Model){
     <div class="col-md-4 col-sm-6 my-2">
@@ -19,7 +34,7 @@
     </div>
     }
 </div>
-
+</body>
 
 
 

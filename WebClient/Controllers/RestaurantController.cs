@@ -87,7 +87,22 @@ namespace WebClient.Controllers
             }
         }
 
-       
+        public ActionResult SortByAscendingName()
+        {
+            return View("Index",_restaurantService.SortNameAscending());
+        }
+        public ActionResult SortByDescendingName()
+        {
+            return View("Index",_restaurantService.SortNameDescending());
+        }
+        public ActionResult SortByAscendingId()
+        {
+            return View("Index", _restaurantService.SortIdAscending());
+        }
+        public ActionResult SortByDescendingId()
+        {
+            return View("Index", _restaurantService.SortIdDescending());
+        }
 
     }
 }

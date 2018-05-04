@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace DbFirst
 {
     using System;
@@ -20,8 +22,10 @@ namespace DbFirst
         {
             this.ReviewerInfoes = new HashSet<ReviewerInfo>();
         }
-    
+        
         public int restaurantId { get; set; }
+        [Required(ErrorMessage = "Name cannot be left blank")]
+        [StringLength(250, ErrorMessage = "Name cannot be longer than 250 characters")]
         public string RestaurantName { get; set; }
         public string City { get; set; }
         public string Street { get; set; }

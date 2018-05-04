@@ -18,6 +18,10 @@ namespace ServiceInterfaces
         Dictionary<RestaurantInfo, double> TopThreeRatedRestaurants();
         List<RestaurantInfo> SearchByName(string name);
         Dictionary<ReviewerInfo, RestaurantInfo> AllReviewsForARestauraunt(string name);
+        List<RestaurantInfo> SortIdAscending();
+        List<RestaurantInfo> SortIdDescending();
+        List<RestaurantInfo> SortNameAscending();
+        List<RestaurantInfo> SortNameDescending();
 
     }
 }
