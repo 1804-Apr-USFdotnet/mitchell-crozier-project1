@@ -14,7 +14,7 @@ namespace WebClient.Controllers
         private readonly IRestaurantService _restaurantService;
         private readonly ILoggingService _loggingService;
 
-        public RestaurantController(IRestaurantService restaurantService, IReviewService reviewService, ILoggingService loggingService)
+        public RestaurantController(IRestaurantService restaurantService, ILoggingService loggingService)
         {
             _restaurantService = restaurantService;
             _loggingService = loggingService;

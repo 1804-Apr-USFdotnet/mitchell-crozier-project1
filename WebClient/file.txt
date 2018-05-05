@@ -13,3 +13,4 @@
    at WebClient.Controllers.RestaurantController.Create(RestaurantInfo restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\WebClient\Controllers\RestaurantController.cs:line 48
 2018-05-04 09:54:26.2044|INFO|Services.LoggingService|Added restaurant with an id of: 0 and of name:JOHN CENA
 2018-05-04 09:57:00.7187|INFO|Services.LoggingService|Added restaurant with an id of: 101 and of name:john cena
+2018-05-05 17:58:37.1712|INFO|Services.LoggingService|Created a new review with id: 2

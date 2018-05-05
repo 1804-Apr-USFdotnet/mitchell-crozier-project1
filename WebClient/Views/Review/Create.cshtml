@@ -1,75 +1,38 @@
 ﻿@model DbFirst.ReviewerInfo
-
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
 <body>
-    @using (Html.BeginForm()) 
+
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>ReviewerInfo</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.reviewerId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.reviewerId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.reviewerId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.restaurantId, "restaurantId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("restaurantId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.restaurantId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ReviewerName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ReviewerName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ReviewerName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-group">
+            <div class="row mt-5 d-flex">
+                <div class="col-xl-6 col-lg-8 col-md-10 m-auto my-2">
+                    <div class="card">
+                        <div class="card-body">
+                            @{ Model.restaurantId = Convert.ToInt32(ViewContext.RouteData.Values["id"]);}
+                            @Html.HiddenFor(Model => Model.restaurantId)
+                           
+                            <h5>Add a Review for @ViewBag.RestaurantName</h5>
+                            <h5 class="card-title">
+                                @Html.EditorFor(Model => Model.ReviewerName, new {htmlattributes = new {placeholder = "Enter Name", required = "required"}})<br/>
+                                @Html.ValidationMessageFor(Model => Model.ReviewerName)
+                            </h5>
+                            <p class="card-text">
+                                @Html.EditorFor(Model => Model.Rating, new {htmlattributes = new {placeholder = "Enter City", required = "required"}})
+                                @Html.ValidationMessageFor(Model => Model.Rating)
+                            </p>
+                            <button type="button" class="btn">@Html.ActionLink("Back", "Index", "Restaurant", null, null)</button>
+                            <input type="submit" class="btn btn-success float-right" value="Add"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+
 </body>
-</html>
+

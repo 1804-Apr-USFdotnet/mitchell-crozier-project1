@@ -16,18 +16,20 @@ namespace WebClient.Controllers
         private ProjectZeroDbContext db = new ProjectZeroDbContext();
         private readonly IRestaurantService _restaurantService;
         private readonly IReviewService _reviewService;
+        private readonly ILoggingService _loggingService;
 
-        public ReviewController(IRestaurantService restaurantService, IReviewService reviewService)
+        public ReviewController(IRestaurantService restaurantService, IReviewService reviewService, ILoggingService loggingService)
         {
             _restaurantService = restaurantService;
             _reviewService = reviewService;
+            _loggingService = loggingService;
         }
         // GET: Review
         public ActionResult Index()
         {
             return View(_reviewService.GetAllReviewerInfo());
         }
-
+        
         public ActionResult AllReviews(int id)
         {
             Console.WriteLine("Here I am!");
@@ -48,8 +50,11 @@ namespace WebClient.Controllers
         // GET: Review/Create
         public ActionResult Create()
         {
-            ViewBag.restaurantId = new SelectList(db.RestaurantInfoes, "restaurantId", "RestaurantName");
-            return View();
+//            var res = Request.Params["id"];
+            //var res2 = ViewContext.RouteD
+//            ViewBag.restaurantId = Convert.ToInt32(Request.Params["id"]);
+            ReviewerInfo reviewerInfo = new ReviewerInfo();
+            return View(reviewerInfo);
         }
 
         // POST: Review/Create
@@ -57,12 +62,24 @@ namespace WebClient.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "reviewerId,restaurantId,ReviewerName,Rating,Date")] ReviewerInfo reviewerInfo)
+        public ActionResult Create([Bind(Include = "ReviewerName,Rating, restaurantId")] ReviewerInfo reviewerInfo)
         {
             if (ModelState.IsValid)
             {
-                _reviewService.AddReview(reviewerInfo);
-                return RedirectToAction("Index");
+                try
+                {
+                    int newId = _reviewService.GetAllReviewerInfo().Select(x => x.reviewerId).Max() + 1;
+                    reviewerInfo.reviewerId = newId;
+                    reviewerInfo.Date = DateTime.Now;
+                    var res = reviewerInfo.restaurantId;
+                    _reviewService.AddReview(reviewerInfo);
+                    _loggingService.Log("Created a new review with id: "+ reviewerInfo.restaurantId);
+                    return RedirectToAction("Index","Restaurant");
+                }
+                catch (Exception e)
+                {
+                    _loggingService.Log(e);
+                }
             }
 
             return RedirectToAction("Index");
