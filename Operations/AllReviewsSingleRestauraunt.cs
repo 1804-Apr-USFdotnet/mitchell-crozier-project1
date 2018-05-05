@@ -25,6 +25,20 @@ namespace Operations
             }
             return results;
         }
+
+        public List<ReviewerInfo> GetAllReviews(int restId, List<ReviewerInfo> reviews)
+        {
+            List<ReviewerInfo> reviewList = new List<ReviewerInfo>();
+            foreach (var review in reviews)
+            {
+                if (review.restaurantId == restId)
+                {
+                    reviewList.Add(review);
+                }
+            }
+
+            return reviewList;
+        }
     }
 }
 

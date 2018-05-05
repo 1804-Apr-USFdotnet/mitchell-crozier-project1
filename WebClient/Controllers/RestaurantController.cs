@@ -12,13 +12,11 @@ namespace WebClient.Controllers
     public class RestaurantController : Controller
     {
         private readonly IRestaurantService _restaurantService;
-        private readonly IReviewService _reviewService;
         private readonly ILoggingService _loggingService;
 
         public RestaurantController(IRestaurantService restaurantService, IReviewService reviewService, ILoggingService loggingService)
         {
             _restaurantService = restaurantService;
-            _reviewService = reviewService;
             _loggingService = loggingService;
         }
         // GET: Restaurant

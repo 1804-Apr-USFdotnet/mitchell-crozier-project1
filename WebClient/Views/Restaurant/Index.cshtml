@@ -11,10 +11,11 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title text-center">Choose a sort method</h5>
-                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Id Ascending", "SortByAscendingId")</button>
-                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Id Descending", "SortByDescendingId")</button>
-                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Name Ascending", "SortByAscendingName")</button>
-                <button type="button" class="btn btn-block p-1 m-1">@Html.ActionLink("Sort: Name Descending", "SortByDescendingName")</button>
+                @Html.ActionLink("Sort: Id Ascending", "SortByAscendingId", null, htmlAttributes: new { @class = "btn btn-secondary btn-block p-1 m-1" })
+                <span class="glyphicon glyphicon-search"></span>
+                @Html.ActionLink("Sort: Id Descending", "SortByDescendingId", null, htmlAttributes: new { @class = "btn btn-secondary btn-block p-1 m-1" })
+                @Html.ActionLink("Sort: Name Ascending", "SortByAscendingName", null, htmlAttributes: new { @class = "btn btn-secondary btn-block p-1 m-1" })
+                @Html.ActionLink("Sort: Name Descending", "SortByDescendingName", null, htmlAttributes: new { @class = "btn btn-secondary btn-block p-1 m-1" })
             </div>
         </div>
     </div>
@@ -29,6 +30,8 @@
                 @Html.ActionLink("Details", "Details", new { id = rest.restaurantId })
                 @Html.ActionLink("Update", "Update", new { id = rest.restaurantId })
                 @Html.ActionLink("Delete", "Delete", new { id = rest.restaurantId })
+                @Html.ActionLink("View Reviews", "AllReviews", "Review", new { id = rest.restaurantId }, null)
+                @Html.ActionLink("Add Review", "Create", "Review", new { id = rest.restaurantId }, null)
             </div>
         </div>
     </div>

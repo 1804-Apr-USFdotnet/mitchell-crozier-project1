@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Operations;
 
 namespace Services
 {
@@ -21,6 +22,13 @@ namespace Services
         {
             Console.WriteLine(_reviewRepository.getAll());
             return _reviewRepository.getAll().ToList();
+        }
+
+        public List<ReviewerInfo> GetAllReviewsForARestaurant(int restaurantId)
+        {
+            var fullList = GetAllReviewerInfo();
+            var allReviews = new AllReviewsSingleRestauraunt();
+            return allReviews.GetAllReviews(restaurantId, fullList);
         }
 
         public ReviewerInfo GetReviewById(int reviewId)
