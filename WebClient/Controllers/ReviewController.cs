@@ -95,9 +95,7 @@ namespace WebClient.Controllers
             {
                 return HttpNotFound();
             }
-
-            var result = new SelectList(_restaurantService.GetAllRestaurantInfo(), "restaurantId", "RestaurantName", reviewerInfo.restaurantId);
-            ViewBag.restaurantId = result;
+            
             return View(reviewerInfo);
         }
 
@@ -110,12 +108,11 @@ namespace WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reviewerInfo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                reviewerInfo.Date = DateTime.Now;
+                _reviewService.UpdateReview(reviewerInfo);
+                return RedirectToAction("AllReviews", new {id = reviewerInfo.restaurantId});
             }
-            ViewBag.restaurantId = new SelectList(db.RestaurantInfoes, "restaurantId", "RestaurantName", reviewerInfo.restaurantId);
-            return View(reviewerInfo);
+            return HttpNotFound();
         }
 
         // GET: Review/Delete/5

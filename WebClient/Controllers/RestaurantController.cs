@@ -20,6 +20,11 @@ namespace WebClient.Controllers
             _restaurantService = restaurantService;
             _loggingService = loggingService;
         }
+
+        public ActionResult Index()
+        {
+            return View(_restaurantService.GetAllRestaurantInfo());
+        }
         // GET: Restaurant
         [HttpGet] // default type of Action
         public ActionResult Index(string search)

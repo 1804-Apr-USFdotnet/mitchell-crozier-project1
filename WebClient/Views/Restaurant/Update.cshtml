@@ -37,8 +37,8 @@
                             @Html.EditorFor(Model => Model.Email, new {htmlattributes = new {placeholder = "Enter Email", required = "required"}})
                             @Html.ValidationMessageFor(Model => Model.Email)
                         </p>
-                        <button type="button" class="btn">@Html.ActionLink("Back", "Index")</button>
-                        <input type="submit" class="btn btn-success float-right" value="Add"/>
+                        @Html.ActionLink("Back", "Index", null, htmlAttributes: new { @class = "btn btn-secondary px-5 py-3" })
+                            <input type="submit" class="btn btn-success px-5 py-3  float-right" value="Add" />
                     </div>
                 </div>
             </div>

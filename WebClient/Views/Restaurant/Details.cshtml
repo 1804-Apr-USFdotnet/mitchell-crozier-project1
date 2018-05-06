@@ -12,7 +12,8 @@
                     <p class="card-text">@Model.City</p>
                     <p class="card-text">@Model.Description</p>
                     <p class="card-text">@Model.Email</p>
-                    <button type="button" class="btn">@Html.ActionLink("Back", "Index")</button>
+                    @Html.ActionLink("Back", "Index", null, htmlAttributes: new { @class = "btn btn-secondary px-5 py-3" })
+                    
                 </div>
             </div>
         </div>
