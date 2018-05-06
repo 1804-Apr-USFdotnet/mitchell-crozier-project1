@@ -25,6 +25,7 @@ namespace WebClient
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-solar.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/site.css"));
         }
     }

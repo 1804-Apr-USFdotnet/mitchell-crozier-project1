@@ -22,6 +22,10 @@ namespace ServiceInterfaces
         List<RestaurantInfo> SortIdDescending();
         List<RestaurantInfo> SortNameAscending();
         List<RestaurantInfo> SortNameDescending();
+        List<RestaurantInfo> SortIdAscending(List<RestaurantInfo> list);
+        List<RestaurantInfo> SortIdDescending(List<RestaurantInfo> list);
+        List<RestaurantInfo> SortNameAscending(List<RestaurantInfo> list);
+        List<RestaurantInfo> SortNameDescending(List<RestaurantInfo> list);
 
     }
 }

@@ -97,6 +97,24 @@ namespace Services
         {
             return restaurantRepository.getAll().OrderByDescending(x => x.RestaurantName).ToList();
         }
+        public List<RestaurantInfo> SortIdAscending(List<RestaurantInfo> list)
+        {
+            return list.OrderBy(x => x.restaurantId).ToList();
+        }
+        public List<RestaurantInfo> SortIdDescending(List<RestaurantInfo> list)
+        {
+            return list.OrderByDescending(x => x.restaurantId).ToList();
+        }
+
+        public List<RestaurantInfo> SortNameAscending(List<RestaurantInfo> list)
+        {
+            return list.OrderBy(x => x.RestaurantName).ToList();
+        }
+
+        public List<RestaurantInfo> SortNameDescending(List<RestaurantInfo> list)
+        {
+            return list.OrderByDescending(x => x.RestaurantName).ToList();
+        }
     }
 
     

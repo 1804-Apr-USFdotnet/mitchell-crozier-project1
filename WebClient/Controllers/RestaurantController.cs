@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DbFirst;
+using Microsoft.Ajax.Utilities;
 using ServiceInterfaces;
 
 
@@ -20,10 +21,19 @@ namespace WebClient.Controllers
             _loggingService = loggingService;
         }
         // GET: Restaurant
-        [HttpGet]// default type of Action
-        public ActionResult Index()
+        [HttpGet] // default type of Action
+        public ActionResult Index(string search)
         {
-            return View(_restaurantService.GetAllRestaurantInfo());
+            string query = Request.QueryString["search"];
+            if (query.IsNullOrWhiteSpace())
+            {
+                if (search.IsNullOrWhiteSpace())
+                {
+                    return View(_restaurantService.GetAllRestaurantInfo());
+                }
+                return View(_restaurantService.SearchByName(search));
+            }
+            return View(_restaurantService.SearchByName(query));
         }
 
         // GET: Restaurants/Details/5
@@ -36,7 +46,7 @@ namespace WebClient.Controllers
         {
             return View(_restaurantService.GetRestaurantById(id));
         }
-        
+
         [HttpPost]
         public ActionResult Update(RestaurantInfo restaurant)
         {
@@ -63,14 +73,14 @@ namespace WebClient.Controllers
                 _loggingService.Log("Added restaurant with an id of: " + restaurant.restaurantId + " and of name:" + restaurant.RestaurantName);
                 return RedirectToAction("Index");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 // log some problem
                 _loggingService.Log(e);
                 return View();
             }
         }
-        
+
         public ActionResult Delete(int id)
         {
             try
@@ -85,20 +95,72 @@ namespace WebClient.Controllers
             }
         }
 
-        public ActionResult SortByAscendingName()
+        public ActionResult SortByAscendingName(string search)
         {
-            return View("Index",_restaurantService.SortNameAscending());
+            string query = Request.QueryString["search"];
+            if (!query.IsNullOrWhiteSpace())
+            {
+                var list = _restaurantService.SearchByName(query);
+                return View("Index", _restaurantService.SortNameAscending(list));
+            }
+            else if (!search.IsNullOrWhiteSpace())
+            {
+                var searchList = _restaurantService.SearchByName(search);
+                return View("Index", _restaurantService.SortNameAscending(searchList));
+
+            }
+            return View("Index", _restaurantService.SortNameAscending());
         }
-        public ActionResult SortByDescendingName()
+
+        public ActionResult SortByDescendingName(string search)
         {
-            return View("Index",_restaurantService.SortNameDescending());
+            string query = Request.QueryString["search"];
+            if (!query.IsNullOrWhiteSpace())
+            {
+                var list = _restaurantService.SearchByName(query);
+                return View("Index", _restaurantService.SortNameDescending(list));
+            }
+            else if (!search.IsNullOrWhiteSpace())
+            {
+                var searchList = _restaurantService.SearchByName(search);
+                return View("Index", _restaurantService.SortNameDescending(searchList));
+
+            }
+            return View("Index", _restaurantService.SortNameDescending());
         }
-        public ActionResult SortByAscendingId()
+
+        public ActionResult SortByAscendingId(string search)
         {
+            string query = Request.QueryString["search"];
+            if (!query.IsNullOrWhiteSpace())
+            {
+                var list = _restaurantService.SearchByName(query);
+                return View("Index", _restaurantService.SortIdAscending(list));
+            }
+            else if (!search.IsNullOrWhiteSpace())
+            {
+                var searchList = _restaurantService.SearchByName(search);
+                return View("Index", _restaurantService.SortIdAscending(searchList));
+
+            }
             return View("Index", _restaurantService.SortIdAscending());
+
         }
-        public ActionResult SortByDescendingId()
+
+        public ActionResult SortByDescendingId(string search)
         {
+            string query = Request.QueryString["search"];
+            if (!query.IsNullOrWhiteSpace())
+            {
+                var list = _restaurantService.SearchByName(query);
+                return View("Index", _restaurantService.SortIdDescending(list));
+            }
+            else if (!search.IsNullOrWhiteSpace())
+            {
+                var searchList = _restaurantService.SearchByName(search);
+                return View("Index", _restaurantService.SortIdDescending(searchList));
+
+            }
             return View("Index", _restaurantService.SortIdDescending());
         }
 

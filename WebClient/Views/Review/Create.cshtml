@@ -15,18 +15,18 @@
                         <div class="card-body">
                             @{ Model.restaurantId = Convert.ToInt32(ViewContext.RouteData.Values["id"]);}
                             @Html.HiddenFor(Model => Model.restaurantId)
-                           
+
                             <h5>Add a Review for @ViewBag.RestaurantName</h5>
                             <h5 class="card-title">
-                                @Html.EditorFor(Model => Model.ReviewerName, new {htmlattributes = new {placeholder = "Enter Name", required = "required"}})<br/>
+                                @Html.EditorFor(Model => Model.ReviewerName, new { htmlattributes = new { placeholder = "Enter Your Name", required = "required" } })<br />
                                 @Html.ValidationMessageFor(Model => Model.ReviewerName)
                             </h5>
                             <p class="card-text">
-                                @Html.EditorFor(Model => Model.Rating, new {htmlattributes = new {placeholder = "Enter City", required = "required"}})
+                                @Html.EditorFor(Model => Model.Rating, new { htmlattributes = new { placeholder = "Enter Your Rating", required = "required" } })
                                 @Html.ValidationMessageFor(Model => Model.Rating)
                             </p>
-                            <button type="button" class="btn">@Html.ActionLink("Back", "Index", "Restaurant", null, null)</button>
-                            <input type="submit" class="btn btn-success float-right" value="Add"/>
+                            @Html.ActionLink("Back", "AllReviews", new { id = Model.restaurantId}, htmlAttributes: new { @class = "btn btn-secondary px-5 py-3" })
+                            <input type="submit" class="btn btn-success px-5 py-3  float-right" value="Add" />
                         </div>
                     </div>
                 </div>

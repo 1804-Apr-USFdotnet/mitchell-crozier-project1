@@ -48,11 +48,13 @@ namespace WebClient.Controllers
         }
 
         // GET: Review/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
 //            var res = Request.Params["id"];
             //var res2 = ViewContext.RouteD
-//            ViewBag.restaurantId = Convert.ToInt32(Request.Params["id"]);
+
+            var result = _restaurantService.GetRestaurantById(id).RestaurantName;
+            ViewBag.RestaurantName = result;
             ReviewerInfo reviewerInfo = new ReviewerInfo();
             return View(reviewerInfo);
         }

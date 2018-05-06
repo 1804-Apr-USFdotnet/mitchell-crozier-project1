@@ -6,25 +6,35 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="@Url.Action("Index", "Home")">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "Restaurant")">Restaurants</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Create", "Restaurant")">Add a restaurant</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About", "Home")">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
-                </li>
-            </ul>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("Index", "Home")">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Restaurant")">Restaurants</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Create", "Restaurant")">Add a restaurant</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("About", "Home")">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
+            </li>
+               
+        </ul>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form class="navbar-nav" role="search">
+                <div class="input-group">
+                    <button class="btn btn-secondary" type="submit">@Html.ActionLink(" ", "Index", "Restaurant")<i class="fa fa-search"></i></button>
+                    <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+                </div>
+            </form>
         </div>
     </div>
+    </div>
+        
 
 </nav>
