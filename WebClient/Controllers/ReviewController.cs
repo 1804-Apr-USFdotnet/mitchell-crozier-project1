@@ -84,7 +84,7 @@ namespace WebClient.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AllReviews");
         }
 
         // GET: Review/Edit/5
@@ -117,29 +117,17 @@ namespace WebClient.Controllers
         }
 
         // GET: Review/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                _reviewService.DeleteReviewById(id);
+                return RedirectToAction("AllReviews");
             }
-            ReviewerInfo reviewerInfo = db.ReviewerInfoes.Find(id);
-            if (reviewerInfo == null)
+            catch
             {
-                return HttpNotFound();
+                return View();
             }
-            return View(reviewerInfo);
-        }
-
-        // POST: Review/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ReviewerInfo reviewerInfo = db.ReviewerInfoes.Find(id);
-            db.ReviewerInfoes.Remove(reviewerInfo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

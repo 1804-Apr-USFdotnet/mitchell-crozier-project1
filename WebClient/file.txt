@@ -17,3 +17,5 @@
 2018-05-05 18:16:46.6049|INFO|Services.LoggingService|Created a new review with id: 3
 2018-05-06 00:22:29.0810|INFO|Services.LoggingService|Created a new review with id: 1
 2018-05-06 04:27:44.0937|INFO|Services.LoggingService|Added restaurant with an id of: 101 and of name:Karls
+2018-05-06 05:22:59.0430|INFO|Services.LoggingService|Created a new review with id: 1
+2018-05-06 05:25:31.3388|INFO|Services.LoggingService|Created a new review with id: 1
