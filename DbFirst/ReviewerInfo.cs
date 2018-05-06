@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace DbFirst
 {
     using System;
@@ -19,16 +17,9 @@ namespace DbFirst
         public int reviewerId { get; set; }
         public int restaurantId { get; set; }
         public string ReviewerName { get; set; }
-        [Required(ErrorMessage = "Cannot leave rating blank!")]
-        [Range(1,10, ErrorMessage = "Rating must be in the range 1-10")]
         public int Rating { get; set; }
         public System.DateTime Date { get; set; }
-
-        public override string ToString()
-        {
-            return $"\nreviewerId: {reviewerId}\nName: {ReviewerName} \nRating: {Rating}\nDate: {Date}";
-        }
-
+    
         public virtual RestaurantInfo RestaurantInfo { get; set; }
     }
 }

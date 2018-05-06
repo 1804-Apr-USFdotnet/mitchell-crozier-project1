@@ -109,6 +109,7 @@ namespace WebClient.Controllers
             if (ModelState.IsValid)
             {
                 reviewerInfo.Date = DateTime.Now;
+                reviewerInfo.RestaurantInfo = _restaurantService.GetRestaurantById(reviewerInfo.restaurantId);
                 _reviewService.UpdateReview(reviewerInfo);
                 return RedirectToAction("AllReviews", new {id = reviewerInfo.restaurantId});
             }

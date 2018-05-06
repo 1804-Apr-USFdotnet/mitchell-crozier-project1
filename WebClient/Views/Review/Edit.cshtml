@@ -17,6 +17,7 @@
                             <h5>Update the Review</h5>
                             <h5 class="card-title">
                                 @Html.HiddenFor(@Model => Model.reviewerId)
+                                @Html.HiddenFor(@Model => Model.restaurantId)
 
                                 @Html.EditorFor(Model => Model.ReviewerName, new { htmlattributes = new { placeholder = "Enter Name", required = "required" } })<br />
                                 @Html.ValidationMessageFor(Model => Model.ReviewerName)
