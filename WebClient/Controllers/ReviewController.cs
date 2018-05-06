@@ -74,8 +74,8 @@ namespace WebClient.Controllers
                     reviewerInfo.Date = DateTime.Now;
                     var res = reviewerInfo.restaurantId;
                     _reviewService.AddReview(reviewerInfo);
-                    _loggingService.Log("Created a new review with id: "+ reviewerInfo.restaurantId);
-                    return RedirectToAction("AllReviews");
+                    _loggingService.Log("Created a new review with id: " + reviewerInfo.restaurantId);
+                    return RedirectToAction("AllReviews", new {id= reviewerInfo.restaurantId});
                 }
                 catch (Exception e)
                 {

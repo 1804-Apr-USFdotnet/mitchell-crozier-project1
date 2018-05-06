@@ -19,3 +19,10 @@
 2018-05-06 04:27:44.0937|INFO|Services.LoggingService|Added restaurant with an id of: 101 and of name:Karls
 2018-05-06 05:22:59.0430|INFO|Services.LoggingService|Created a new review with id: 1
 2018-05-06 05:25:31.3388|INFO|Services.LoggingService|Created a new review with id: 1
+2018-05-06 15:42:34.4319|INFO|Services.LoggingService|Added restaurant with an id of: 102 and of name:Killua
+2018-05-06 15:42:50.7697|INFO|Services.LoggingService|Created a new review with id: 102
+2018-05-06 15:48:04.7926|INFO|Services.LoggingService|Created a new review with id: 102
+2018-05-06 15:52:06.7357|INFO|Services.LoggingService|Created a new review with id: 102
+2018-05-06 16:02:54.4361|INFO|Services.LoggingService|Created a new review with id: 2
+2018-05-06 16:10:01.5009|INFO|Services.LoggingService|Created a new review with id: 2
+2018-05-06 16:11:21.2447|INFO|Services.LoggingService|Created a new review with id: 2
