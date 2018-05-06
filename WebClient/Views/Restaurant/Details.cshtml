@@ -4,16 +4,19 @@
 }
 
 <body>
-<div class="row mt-5">
-        <div class="col-md-4 col-sm-6 my-2">
-            <div class="card">  
+<div class="row mt-5 d-flex">
+    <div class="col-xl-6 col-lg-8 col-md-10 m-auto my-2">
+            <div class="card">
+                @Html.ActionLink("Delete", "Delete", new { id = Model.restaurantId }, htmlAttributes: new { @class = "btn btn-warning float-right" })
                 <div class="card-body">
                     <h5 class="card-title">@Model.RestaurantName</h5>
                     <p class="card-text">@Model.City</p>
                     <p class="card-text">@Model.Description</p>
                     <p class="card-text">@Model.Email</p>
                     @Html.ActionLink("Back", "Index", null, htmlAttributes: new { @class = "btn btn-secondary px-5 py-3" })
-                    
+                    @Html.ActionLink("Update", "Update", new {id = @Model.restaurantId}, htmlAttributes: new {@class = "btn btn-primary px-5 py-3 float-right" })
+
+
                 </div>
             </div>
         </div>

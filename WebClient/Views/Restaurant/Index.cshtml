@@ -69,8 +69,6 @@
                         <h5 class="card-title">@rest.RestaurantName</h5>
                         <p class="card-text">@rest.City</p>
                         @Html.ActionLink("Details", "Details", new { id = rest.restaurantId }) ||
-                        @Html.ActionLink("Update", "Update", new { id = rest.restaurantId }) ||
-                        @Html.ActionLink("Delete", "Delete", new { id = rest.restaurantId }) ||
                         @Html.ActionLink("View Reviews", "AllReviews", "Review", new { id = rest.restaurantId }, null)
                         
                     </div>

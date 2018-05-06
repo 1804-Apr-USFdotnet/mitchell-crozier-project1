@@ -86,6 +86,11 @@ namespace WebClient.Controllers
             }
         }
 
+        public ActionResult TopThreeRated()
+        {
+            return View(_restaurantService.TopThreeRatedRestaurants());
+        }
+
         public ActionResult Delete(int id)
         {
             try

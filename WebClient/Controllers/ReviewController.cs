@@ -32,7 +32,6 @@ namespace WebClient.Controllers
         
         public ActionResult AllReviews(int id)
         {
-            Console.WriteLine("Here I am!");
             return View(_reviewService.GetAllReviewsForARestaurant(id));
         }   
 
@@ -76,7 +75,7 @@ namespace WebClient.Controllers
                     var res = reviewerInfo.restaurantId;
                     _reviewService.AddReview(reviewerInfo);
                     _loggingService.Log("Created a new review with id: "+ reviewerInfo.restaurantId);
-                    return RedirectToAction("Index","Restaurant");
+                    return RedirectToAction("AllReviews");
                 }
                 catch (Exception e)
                 {
