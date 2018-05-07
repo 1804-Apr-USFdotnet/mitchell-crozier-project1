@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using DbFirst;
 using Microsoft.Ajax.Utilities;
 using ServiceInterfaces;
@@ -14,11 +15,13 @@ namespace WebClient.Controllers
     {
         private readonly IRestaurantService _restaurantService;
         private readonly ILoggingService _loggingService;
+        private readonly IMapper _mapper;
 
-        public RestaurantController(IRestaurantService restaurantService, ILoggingService loggingService)
+        public RestaurantController(IRestaurantService restaurantService, ILoggingService loggingService,  IMapper mapper)
         {
             _restaurantService = restaurantService;
             _loggingService = loggingService;
+            _mapper = mapper;
         }
 
         public ActionResult Index()
@@ -96,6 +99,7 @@ namespace WebClient.Controllers
             try
             {
                 // TODO: Add delete logic here
+                
                 _restaurantService.DeleteRestaurantById(id);
                 return RedirectToAction("Index");
             }

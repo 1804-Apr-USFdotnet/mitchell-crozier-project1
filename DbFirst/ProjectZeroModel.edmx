@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ProjectZeroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ProjectZeroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="RestaurantInfo">
           <Key>
             <PropertyRef Name="restaurantId" />
@@ -46,7 +46,8 @@
             <End Role="ReviewerInfo" EntitySet="ReviewerInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectZeroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -74,8 +75,11 @@
           <NavigationProperty Name="RestaurantInfo" Relationship="Self.FK_ReviewerInfo_RestaurantInfo1" FromRole="ReviewerInfo" ToRole="RestaurantInfo" />
         </EntityType>
         <Association Name="FK_ReviewerInfo_RestaurantInfo1">
-          <End Role="RestaurantInfo" Type="Self.RestaurantInfo" Multiplicity="1" />
-          <End Role="ReviewerInfo" Type="Self.ReviewerInfo" Multiplicity="*" />
+          <End Role="RestaurantInfo" Type="Self.RestaurantInfo" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReviewerInfo" Type="Self.ReviewerInfo" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="RestaurantInfo">
               <PropertyRef Name="restaurantId" />

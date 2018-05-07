@@ -6,11 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+using AutoMapper;
 using DbFirst;
 using RepositoryInterfaces;
 using Respositories;
 using ServiceInterfaces;
 using Services;
+using WebClient.Models;
 
 namespace WebClient.App_Start
 {
@@ -23,6 +25,11 @@ namespace WebClient.App_Start
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            var mapperConfiguration = new MapperConfiguration(cfg => { cfg.AddProfile(new Maps()); });
+            var mapper = mapperConfiguration.CreateMapper();
+
+            //Automapper
+            builder.RegisterInstance(mapper).As<IMapper>();
 
             //Shout out to my boi Michael 
             builder.RegisterType<ProjectZeroDbContext>().AsSelf().InstancePerLifetimeScope();
@@ -36,6 +43,7 @@ namespace WebClient.App_Start
             builder.RegisterType<ReviewerRepository>().As<IReviewerRepository>();
 
             builder.RegisterType<ReviewerService>().As<IReviewService>();
+
 
             //builder.RegisterType<Queries>().As<IQueries>();
 

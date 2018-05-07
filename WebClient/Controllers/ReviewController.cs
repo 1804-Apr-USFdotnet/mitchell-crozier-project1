@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using DbFirst;
 using ServiceInterfaces;
+using WebClient.Models;
 
 namespace WebClient.Controllers
 {
@@ -17,12 +19,14 @@ namespace WebClient.Controllers
         private readonly IRestaurantService _restaurantService;
         private readonly IReviewService _reviewService;
         private readonly ILoggingService _loggingService;
+        private readonly IMapper _mapper;
 
-        public ReviewController(IRestaurantService restaurantService, IReviewService reviewService, ILoggingService loggingService)
+        public ReviewController(IRestaurantService restaurantService, IReviewService reviewService, ILoggingService loggingService, IMapper mapper)
         {
             _restaurantService = restaurantService;
             _reviewService = reviewService;
             _loggingService = loggingService;
+            _mapper = mapper;
         }
         // GET: Review
         public ActionResult Index()
@@ -52,9 +56,10 @@ namespace WebClient.Controllers
 //            var res = Request.Params["id"];
             //var res2 = ViewContext.RouteD
 
-            var result = _restaurantService.GetRestaurantById(id).RestaurantName;
+            var vRest = _mapper.Map<RestaurantViewModel>(_restaurantService.GetRestaurantById(id));
+            string result = vRest.RestaurantName;
             ViewBag.RestaurantName = result;
-            ReviewerInfo reviewerInfo = new ReviewerInfo();
+            ReviewViewModel reviewerInfo = new ReviewViewModel();
             return View(reviewerInfo);
         }
 

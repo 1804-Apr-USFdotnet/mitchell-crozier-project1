@@ -11,10 +11,12 @@ namespace Respositories
     public class RestaurantRepository : IRestaurantRepository
     {
         private readonly ProjectZeroDbContext _context;
+        private readonly IReviewerRepository _reviewerRepository;
 
-        public RestaurantRepository(ProjectZeroDbContext context)
+        public RestaurantRepository(ProjectZeroDbContext context, IReviewerRepository reviewerRepository)
         {
             _context = context;
+            _reviewerRepository = reviewerRepository;
         }
 
         public IQueryable<RestaurantInfo> getAll()
@@ -46,9 +48,17 @@ namespace Respositories
             _context.SaveChanges();
         }
 
-        public void DeleteRestaurantById(int restaurantId)
+        public void DeleteRestaurantById(int restId)
         {
-            var rest = GetRestaurantById(restaurantId);
+            var rest = GetRestaurantById(restId);
+            var reviews = _reviewerRepository.getAll();
+            var count1 = reviews.Count();
+            var selectedReviews = reviews.Where(x => x.restaurantId == restId);
+            var count2 = selectedReviews.Count();
+            foreach (var review in selectedReviews)
+            {
+                _context.ReviewerInfoes.Remove(review);
+            }
             _context.RestaurantInfoes.Remove(rest);
             _context.SaveChanges();
         }
