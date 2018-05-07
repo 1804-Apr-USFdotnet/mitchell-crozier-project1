@@ -34,6 +34,7 @@ namespace WebClient
                     id = UrlParameter.Optional
                 }
             );
+            routes.MapMvcAttributeRoutes();
             
 
         }

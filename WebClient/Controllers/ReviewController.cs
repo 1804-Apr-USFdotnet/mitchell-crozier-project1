@@ -120,12 +120,14 @@ namespace WebClient.Controllers
         {
             try
             {
+                int restId = _reviewService.GetReviewById(id).restaurantId;
+                
                 _reviewService.DeleteReviewById(id);
-                return RedirectToAction("AllReviews");
+                return RedirectToAction("AllReviews", new{ id = restId});
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Restaurant");
             }
         }
 
