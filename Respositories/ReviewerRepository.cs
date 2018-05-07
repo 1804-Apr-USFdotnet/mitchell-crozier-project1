@@ -17,7 +17,7 @@ namespace Respositories
             _context = context;
         }
 
-        public IEnumerable<ReviewerInfo> getAll()
+        public IQueryable<ReviewerInfo> getAll()
         {
             return _context.ReviewerInfoes;
         }

@@ -28,3 +28,4 @@
 2018-05-06 16:11:21.2447|INFO|Services.LoggingService|Created a new review with id: 2
 2018-05-07 10:48:21.7333|INFO|Services.LoggingService|Created a new review with id: 2
 2018-05-07 10:51:19.3977|INFO|Services.LoggingService|Created a new review with id: 87
+2018-05-07 11:18:57.9917|INFO|Services.LoggingService|Created a new review with id: 87

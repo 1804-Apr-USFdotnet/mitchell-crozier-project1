@@ -1,11 +1,12 @@
 ﻿using DbFirst;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RepositoryInterfaces
 {
     public interface IRestaurantRepository
     {
-        IEnumerable<RestaurantInfo> getAll();
+        IQueryable<RestaurantInfo> getAll();
         RestaurantInfo GetRestaurantById(int restId);
         List<int> ConvertNameIntoId(string restaurantName);
         void AddRestaurant(RestaurantInfo restaurant);

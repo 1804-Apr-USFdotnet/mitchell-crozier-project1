@@ -9,7 +9,7 @@ namespace RepositoryInterfaces
 {
     public interface IReviewerRepository
     {
-        IEnumerable<ReviewerInfo> getAll();
+        IQueryable<ReviewerInfo> getAll();
         ReviewerInfo GetReviewById(int revId);
         void AddReview(ReviewerInfo review);
         void DeleteReview(ReviewerInfo review);

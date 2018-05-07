@@ -17,7 +17,7 @@ namespace Respositories
             _context = context;
         }
 
-        public IEnumerable<RestaurantInfo> getAll()
+        public IQueryable<RestaurantInfo> getAll()
         {
             return _context.RestaurantInfoes;
         }
