@@ -14,8 +14,9 @@ namespace Operations
         {    
             //Shout out to my boi Rafael for the crazy linq command
 
-            var results = reviewsList.GroupBy(x => x.restaurantId,
-                x => new { x.restaurantId, x.Rating }).Join(restuarants, x => x.Key, y => y.restaurantId,
+            var results = reviewsList
+                .GroupBy(x => x.restaurantId,x => new { x.restaurantId, x.Rating })
+                .Join(restuarants, x => x.Key, y => y.restaurantId,
                 (x, y) => new { RestaurantInfo = y, AvgRating = x.Average(s => s.Rating) });
 
             
@@ -26,11 +27,18 @@ namespace Operations
             {
                 if(result.AvgRating > one)
                 {
+                    three = two;
+                    resThree = resTwo;
+                    two = one;
+                    resTwo = resOne;
                     one = result.AvgRating;
+                    
                     resOne = result.RestaurantInfo;
                 }
                 else if (result.AvgRating > two)
                 {
+                    three = two;
+                    resThree = resTwo;
                     two = result.AvgRating;
                     resTwo = result.RestaurantInfo;
 

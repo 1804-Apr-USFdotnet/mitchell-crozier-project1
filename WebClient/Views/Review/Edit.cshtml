@@ -1,4 +1,4 @@
-﻿@model DbFirst.ReviewerInfo
+﻿@model global::WebClient.Models.ReviewViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -23,7 +23,7 @@
                                 @Html.ValidationMessageFor(Model => Model.ReviewerName)
                             </h5>
                             <p class="card-text">
-                                @Html.EditorFor(Model => Model.Rating, new { htmlattributes = new { placeholder = "Enter Rating", required = "required" } })
+                                @Html.EditorFor(Model => Model.Rating, new { htmlattributes = new { placeholder = "Enter Rating", required = "required" , min = 1, max = 10} })
                                 @Html.ValidationMessageFor(Model => Model.Rating)
                             </p>
                             @Html.ActionLink("Back", "AllReviews", new {id = Model.restaurantId}, htmlAttributes: new { @class = "btn btn-secondary px-5 py-3" })

@@ -11,8 +11,11 @@ namespace WebClient.Models
     {
         public Maps()
         {
-            CreateMap<RestaurantInfo, RestaurantViewModel>();
-            
+            CreateMap<RestaurantInfo, RestaurantViewModel>()
+                .ForSourceMember(src => src.ReviewerInfoes, opt => opt.Ignore());
+            CreateMap<RestaurantViewModel, RestaurantInfo>()
+                .ForMember(dst => dst.ReviewerInfoes, opt => opt.Ignore());
+                
             CreateMap<ReviewerInfo, ReviewViewModel>()
                 .ForSourceMember(src => src.RestaurantInfo, opt => opt.Ignore());
             CreateMap<ReviewViewModel, ReviewerInfo>()

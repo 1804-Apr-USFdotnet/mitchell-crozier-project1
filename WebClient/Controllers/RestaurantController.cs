@@ -7,6 +7,7 @@ using AutoMapper;
 using DbFirst;
 using Microsoft.Ajax.Utilities;
 using ServiceInterfaces;
+using WebClient.Models;
 
 
 namespace WebClient.Controllers
@@ -26,7 +27,7 @@ namespace WebClient.Controllers
 
         public ActionResult Index()
         {
-            return View(_restaurantService.GetAllRestaurantInfo());
+            return View(_mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.GetAllRestaurantInfo()));
         }
         // GET: Restaurant
         [HttpGet] // default type of Action
@@ -37,29 +38,44 @@ namespace WebClient.Controllers
             {
                 if (search.IsNullOrWhiteSpace())
                 {
-                    return View(_restaurantService.GetAllRestaurantInfo());
+                    return View(_mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.GetAllRestaurantInfo()));
                 }
-                return View(_restaurantService.SearchByName(search));
+                return View(_mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SearchByName(search)));
             }
-            return View(_restaurantService.SearchByName(query));
+            return View(_mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SearchByName(query)));
         }
 
         // GET: Restaurants/Details/5
         public ActionResult Details(int id)
         {
-            return View(_restaurantService.GetRestaurantById(id));
+            return View(_mapper.Map<RestaurantViewModel>(_restaurantService.GetRestaurantById(id)));
         }
 
         public ActionResult Update(int id)
         {
-            return View(_restaurantService.GetRestaurantById(id));
+            return View(_mapper.Map<RestaurantViewModel>(_restaurantService.GetRestaurantById(id)));
         }
 
         [HttpPost]
-        public ActionResult Update(RestaurantInfo restaurant)
+        [ValidateAntiForgeryToken]
+        public ActionResult Update([Bind(Include = "restaurantId, RestaurantName, City, Street, Description, Email")]RestaurantViewModel restaurant)
         {
-
-            _restaurantService.UpdateRestaurant(restaurant);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var restaurantInfo = _mapper.Map<RestaurantInfo>(restaurant);
+                    _restaurantService.UpdateRestaurant(restaurantInfo);
+                    return RedirectToAction("Details", new { id = restaurant.restaurantId});
+                }
+                catch (Exception e)
+                {
+                    _loggingService.Log("Unable to update " + restaurant.RestaurantName + "possible error with mapper or persisting to database");
+                    _loggingService.Log(e);
+                    return RedirectToAction("Index");
+                }
+            }
+            _loggingService.Log("Restaurant model updated was not valid");
             return RedirectToAction("Index");
         }
         // GET: Restaurants/Create
@@ -70,28 +86,33 @@ namespace WebClient.Controllers
 
         // POST: Restaurants/Create
         [HttpPost]
-        public ActionResult Create(RestaurantInfo restaurant)
+        public ActionResult Create([Bind(Include = "restaurantId,RestaurantName, City, Street, Description, Email")]RestaurantViewModel restaurant)
         {
-            try
+            if (ModelState.IsValid)
             {
-                int newId = _restaurantService.GetAllRestaurantInfo().Select(x => x.restaurantId).Max() + 1;
-                restaurant.restaurantId = newId;
-                _restaurantService.AddRestaurant(restaurant);
-                // log that it worked
-                _loggingService.Log("Added restaurant with an id of: " + restaurant.restaurantId + " and of name:" + restaurant.RestaurantName);
-                return RedirectToAction("Index");
+                try
+                {
+                    int newId = _restaurantService.GetAllRestaurantInfo().Select(x => x.restaurantId).Max() + 1;
+                    restaurant.restaurantId = newId;
+                    var restaurantInfo = _mapper.Map<RestaurantInfo>(restaurant);
+                    _restaurantService.AddRestaurant(restaurantInfo);
+                    _loggingService.Log("Added restaurant with an id of: " + restaurantInfo.restaurantId + " and of name:" +
+                                        restaurantInfo.RestaurantName);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    _loggingService.Log(e);
+                    return RedirectToAction("Index");
+                }
             }
-            catch (Exception e)
-            {
-                // log some problem
-                _loggingService.Log(e);
-                return View();
-            }
+            _loggingService.Log("Restaurant model not valid for creation");
+            return RedirectToAction("Index");
         }
 
         public ActionResult TopThreeRated()
         {
-            return View(_restaurantService.TopThreeRatedRestaurants());
+            return View(_mapper.Map<IDictionary<RestaurantViewModel, double>>(_restaurantService.TopThreeRatedRestaurants()));
         }
 
         public ActionResult Delete(int id)
@@ -115,15 +136,15 @@ namespace WebClient.Controllers
             if (!query.IsNullOrWhiteSpace())
             {
                 var list = _restaurantService.SearchByName(query);
-                return View("Index", _restaurantService.SortNameAscending(list));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortNameAscending(list)));
             }
             else if (!search.IsNullOrWhiteSpace())
             {
                 var searchList = _restaurantService.SearchByName(search);
-                return View("Index", _restaurantService.SortNameAscending(searchList));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortNameAscending(searchList)));
 
             }
-            return View("Index", _restaurantService.SortNameAscending());
+            return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortNameAscending()));
         }
 
         public ActionResult SortByDescendingName(string search)
@@ -132,15 +153,15 @@ namespace WebClient.Controllers
             if (!query.IsNullOrWhiteSpace())
             {
                 var list = _restaurantService.SearchByName(query);
-                return View("Index", _restaurantService.SortNameDescending(list));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortNameDescending(list)));
             }
             else if (!search.IsNullOrWhiteSpace())
             {
                 var searchList = _restaurantService.SearchByName(search);
-                return View("Index", _restaurantService.SortNameDescending(searchList));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortNameDescending(searchList)));
 
             }
-            return View("Index", _restaurantService.SortNameDescending());
+            return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortNameDescending()));
         }
 
         public ActionResult SortByAscendingId(string search)
@@ -149,15 +170,15 @@ namespace WebClient.Controllers
             if (!query.IsNullOrWhiteSpace())
             {
                 var list = _restaurantService.SearchByName(query);
-                return View("Index", _restaurantService.SortIdAscending(list));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortIdAscending(list)));
             }
             else if (!search.IsNullOrWhiteSpace())
             {
                 var searchList = _restaurantService.SearchByName(search);
-                return View("Index", _restaurantService.SortIdAscending(searchList));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortIdAscending(searchList)));
 
             }
-            return View("Index", _restaurantService.SortIdAscending());
+            return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortIdAscending()));
 
         }
 
@@ -167,15 +188,15 @@ namespace WebClient.Controllers
             if (!query.IsNullOrWhiteSpace())
             {
                 var list = _restaurantService.SearchByName(query);
-                return View("Index", _restaurantService.SortIdDescending(list));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortIdDescending(list)));
             }
             else if (!search.IsNullOrWhiteSpace())
             {
                 var searchList = _restaurantService.SearchByName(search);
-                return View("Index", _restaurantService.SortIdDescending(searchList));
+                return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortIdDescending(searchList)));
 
             }
-            return View("Index", _restaurantService.SortIdDescending());
+            return View("Index", _mapper.Map<IEnumerable<RestaurantViewModel>>(_restaurantService.SortIdDescending()));
         }
 
     }

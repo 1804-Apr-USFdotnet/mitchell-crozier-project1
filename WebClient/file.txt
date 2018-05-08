@@ -52,3 +52,29 @@ RestaurantInfo
 2018-05-07 19:51:56.3061|INFO|Services.LoggingService|Created a new review with id: 3
 2018-05-07 20:38:19.7629|INFO|Services.LoggingService|Created a new review with id: 3
 2018-05-07 21:14:29.9372|INFO|Services.LoggingService|Created a new review with id: 3
+2018-05-07 22:25:21.7310|INFO|Services.LoggingService|Unable to delete review with id: 408
+2018-05-07 22:30:05.4132|INFO|Services.LoggingService|Created a new review with id: 3
+2018-05-07 22:30:42.7771|INFO|Services.LoggingService|AutoMapper.AutoMapperConfigurationException: 
+Unmapped members were found. Review the types and members below.
+Add a custom mapping expression, ignore, add a custom resolver, or modify the source/destination type
+For no matching constructor, add a no-arg ctor, add optional arguments, or map all of the constructor parameters
+===============================================================
+RestaurantViewModel -> RestaurantInfo (Destination member list)
+WebClient.Models.RestaurantViewModel -> DbFirst.RestaurantInfo (Destination member list)
+
+Unmapped properties:
+ReviewerInfoes
+
+   at AutoMapper.ConfigurationValidator.AssertConfigurationIsValid(IEnumerable`1 typeMaps)
+   at AutoMapper.MapperConfiguration.AssertConfigurationIsValid(TypeMap typeMap)
+   at lambda_method(Closure , RestaurantViewModel , RestaurantInfo , ResolutionContext )
+   at lambda_method(Closure , Object , Object , ResolutionContext )
+   at AutoMapper.Mapper.AutoMapper.IMapper.Map[TDestination](Object source)
+   at WebClient.Controllers.RestaurantController.Update(RestaurantViewModel restaurant) in C:\Users\Raptor\source\repos\MitchellProjectOne\mitchell-crozier-project1\WebClient\Controllers\RestaurantController.cs:line 67
+2018-05-07 22:30:42.8609|INFO|Services.LoggingService|Restaurant model updated was not valid
+2018-05-07 22:49:40.4578|INFO|Services.LoggingService|Added restaurant with an id of: 103 and of name:Testaurant
+2018-05-07 22:50:14.8307|INFO|Services.LoggingService|Created a new review with id: 103
+2018-05-07 23:10:13.5436|INFO|Services.LoggingService|Added restaurant with an id of: 103 and of name:Keds
+2018-05-07 23:10:43.6277|INFO|Services.LoggingService|Created a new review with id: 103
+2018-05-07 23:23:19.6522|INFO|Services.LoggingService|Added restaurant with an id of: 103 and of name:Test
+2018-05-07 23:23:37.8450|INFO|Services.LoggingService|Created a new review with id: 103

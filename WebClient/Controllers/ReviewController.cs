@@ -91,7 +91,7 @@ namespace WebClient.Controllers
                     _loggingService.Log(e);
                 }
             }
-
+            _loggingService.Log("Review model created was not valid");
             return RedirectToAction("AllReviews" ,reviewerInfo.restaurantId);
         }
 
@@ -131,8 +131,8 @@ namespace WebClient.Controllers
         {
             try
             {
-                _reviewService.DeleteReviewById(id);
                 int restId = _reviewService.GetReviewById(id).restaurantId;
+                _reviewService.DeleteReviewById(id);
                 return RedirectToAction("AllReviews", new{ id = restId});
             }
             catch
