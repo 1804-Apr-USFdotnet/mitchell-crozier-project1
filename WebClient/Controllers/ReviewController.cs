@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -31,12 +32,12 @@ namespace WebClient.Controllers
         // GET: Review
         public ActionResult Index()
         {
-            return View(_reviewService.GetAllReviewerInfo());
+            return View(_mapper.Map<IEnumerable<ReviewViewModel>>(_reviewService.GetAllReviewerInfo()));
         }
         
         public ActionResult AllReviews(int id)
         {
-            return View(_reviewService.GetAllReviewsForARestaurant(id));
+            return View(_mapper.Map<IEnumerable<ReviewViewModel>>(_reviewService.GetAllReviewsForARestaurant(id)));
         }   
 
         // GET: Review/Details/5
@@ -45,9 +46,11 @@ namespace WebClient.Controllers
             ReviewerInfo reviewerInfo = _reviewService.GetReviewById(id);
             if (reviewerInfo == null)
             {
+                _loggingService.Log("Cant get the details of a review that doesn't exist");
                 return HttpNotFound();
             }
-            return View(reviewerInfo);
+            var review = _mapper.Map<ReviewViewModel>(reviewerInfo);
+            return View(review);
         }
 
         // GET: Review/Create
@@ -98,10 +101,10 @@ namespace WebClient.Controllers
             ReviewerInfo reviewerInfo = _reviewService.GetReviewById(id);
             if (reviewerInfo == null)
             {
+                _loggingService.Log("Can't edit a review that doesn't exist in the database");
                 return HttpNotFound();
             }
-            
-            return View(reviewerInfo);
+            return View(_mapper.Map<ReviewViewModel>(reviewerInfo));
         }
 
         // POST: Review/Edit/5
@@ -109,15 +112,17 @@ namespace WebClient.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "reviewerId,restaurantId,ReviewerName,Rating,Date")] ReviewerInfo reviewerInfo)
+        public ActionResult Edit([Bind(Include = "reviewerId,restaurantId,ReviewerName,Rating,Date")] ReviewViewModel reviewViewInfo)
         {
             if (ModelState.IsValid)
             {
-                reviewerInfo.Date = DateTime.Now;
-                reviewerInfo.RestaurantInfo = _restaurantService.GetRestaurantById(reviewerInfo.restaurantId);
-                _reviewService.UpdateReview(reviewerInfo);
-                return RedirectToAction("AllReviews", new {id = reviewerInfo.restaurantId});
+                reviewViewInfo.Date = DateTime.Now;
+                var reviewer = _mapper.Map<ReviewerInfo>(reviewViewInfo);
+                reviewer.RestaurantInfo = _restaurantService.GetRestaurantById(reviewer.restaurantId);
+                _reviewService.UpdateReview(reviewer);
+                return RedirectToAction("AllReviews", new {id = reviewer.restaurantId});
             }
+            _loggingService.Log("Unable to edit the review with id:" + reviewViewInfo.reviewerId);
             return HttpNotFound();
         }
 
@@ -126,13 +131,13 @@ namespace WebClient.Controllers
         {
             try
             {
-                int restId = _reviewService.GetReviewById(id).restaurantId;
-                
                 _reviewService.DeleteReviewById(id);
+                int restId = _reviewService.GetReviewById(id).restaurantId;
                 return RedirectToAction("AllReviews", new{ id = restId});
             }
             catch
             {
+                _loggingService.Log("Unable to delete review with id: " + id);
                 return RedirectToAction("Index", "Restaurant");
             }
         }
