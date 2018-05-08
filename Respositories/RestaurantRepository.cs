@@ -30,25 +30,43 @@ namespace Respositories
             var restFind = _context.RestaurantInfoes.Find(restId);
             return rest;
         }
-        public List<int> ConvertNameIntoId(string restaurantName)
+//        public List<int> ConvertNameIntoId(string restaurantName)
+//        {
+//            var ids = _context.RestaurantInfoes.Where(x => x.RestaurantName == restaurantName).Select(r => r.restaurantId).ToList();
+//            return ids;
+//        }
+
+        public bool AddRestaurant(RestaurantInfo restaurant)
         {
-            var ids = _context.RestaurantInfoes.Where(x => x.RestaurantName == restaurantName).Select(r => r.restaurantId).ToList();
-            return ids;
+            try
+            {
+                _context.RestaurantInfoes.Add(restaurant);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public void AddRestaurant(RestaurantInfo restaurant)
+        public bool DeleteRestaurant(RestaurantInfo restaurant)
         {
-            _context.RestaurantInfoes.Add(restaurant);
-            _context.SaveChanges();
+            try
+            {
+                _context.RestaurantInfoes.Remove(restaurant);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public void DeleteRestaurant(RestaurantInfo restaurant)
-        {
-            _context.RestaurantInfoes.Remove(restaurant);
-            _context.SaveChanges();
-        }
-
-        public void DeleteRestaurantById(int restId)
+        public bool DeleteRestaurantById(int restId)
         {
             var rest = GetRestaurantById(restId);
             var reviews = _reviewerRepository.getAll();
@@ -59,18 +77,39 @@ namespace Respositories
             {
                 _context.ReviewerInfoes.Remove(review);
             }
-            _context.RestaurantInfoes.Remove(rest);
-            _context.SaveChanges();
+
+            try
+            {
+                _context.RestaurantInfoes.Remove(rest);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public void UpdateRestaurant(RestaurantInfo restaurant)
+        public bool UpdateRestaurant(RestaurantInfo restaurant)
         {
             var rest = _context.RestaurantInfoes.Find(restaurant.restaurantId);
             if (rest != null)
             {
-                _context.Entry(rest).CurrentValues.SetValues(restaurant);
-                _context.SaveChanges();
+                try
+                {
+                    _context.Entry(rest).CurrentValues.SetValues(restaurant);
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+
+                return true;
             }
+
+            return false;
         }
         
 

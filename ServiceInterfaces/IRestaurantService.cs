@@ -11,10 +11,10 @@ namespace ServiceInterfaces
     {
         List<RestaurantInfo> GetAllRestaurantInfo();
         RestaurantInfo GetRestaurantById(int restId);
-        void AddRestaurant(RestaurantInfo restaurant);
-        void DeleteRestaurant(RestaurantInfo restaurant);
-        void DeleteRestaurantById(int restaurantId);
-        void UpdateRestaurant(RestaurantInfo restaurant);
+        bool AddRestaurant(RestaurantInfo restaurant);
+        bool DeleteRestaurant(RestaurantInfo restaurant);
+        bool DeleteRestaurantById(int restaurantId);
+        bool UpdateRestaurant(RestaurantInfo restaurant);
         Dictionary<RestaurantInfo, double> TopThreeRatedRestaurants();
         List<RestaurantInfo> SearchByName(string name);
         Dictionary<ReviewerInfo, RestaurantInfo> AllReviewsForARestauraunt(string name);

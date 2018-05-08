@@ -8,10 +8,10 @@ namespace RepositoryInterfaces
     {
         IQueryable<RestaurantInfo> getAll();
         RestaurantInfo GetRestaurantById(int restId);
-        List<int> ConvertNameIntoId(string restaurantName);
-        void AddRestaurant(RestaurantInfo restaurant);
-        void DeleteRestaurant(RestaurantInfo restaurant);
-        void DeleteRestaurantById(int restaurantId);
-        void UpdateRestaurant(RestaurantInfo restaurant);
+//        List<int> ConvertNameIntoId(string restaurantName);
+        bool AddRestaurant(RestaurantInfo restaurant);
+        bool DeleteRestaurant(RestaurantInfo restaurant);
+        bool DeleteRestaurantById(int restaurantId);
+        bool UpdateRestaurant(RestaurantInfo restaurant);
     }
 }

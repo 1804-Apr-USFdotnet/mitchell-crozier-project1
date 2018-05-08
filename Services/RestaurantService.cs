@@ -30,24 +30,24 @@ namespace Services
             return restaurantRepository.GetRestaurantById(restId);
         }
 
-        public void AddRestaurant(RestaurantInfo restaurant)
+        public bool AddRestaurant(RestaurantInfo restaurant)
         {
-            restaurantRepository.AddRestaurant(restaurant);
+            return restaurantRepository.AddRestaurant(restaurant);
         }
 
-        public void DeleteRestaurant(RestaurantInfo restaurant)
+        public bool DeleteRestaurant(RestaurantInfo restaurant)
         {
-            restaurantRepository.DeleteRestaurant(restaurant);
+            return  restaurantRepository.DeleteRestaurant(restaurant);
         }
 
-        public void DeleteRestaurantById(int restaurantId)
+        public bool DeleteRestaurantById(int restaurantId)
         {
-            restaurantRepository.DeleteRestaurantById(restaurantId);
+           return restaurantRepository.DeleteRestaurantById(restaurantId);
         }
 
-        public void UpdateRestaurant(RestaurantInfo restaurant)
+        public bool UpdateRestaurant(RestaurantInfo restaurant)
         {
-            restaurantRepository.UpdateRestaurant(restaurant);
+            return restaurantRepository.UpdateRestaurant(restaurant);
         }
 
         public Dictionary<RestaurantInfo, double> TopThreeRatedRestaurants()
@@ -76,7 +76,12 @@ namespace Services
             var allReviews = new AllReviewsSingleRestauraunt();
             return allReviews.GetAllReviews(name, restaurants, reviews);
         }
-       
+
+        public List<int> ConvertNameIntoId(string restaurantName)
+        {
+            var ids = restaurantRepository.getAll().Where(x => x.RestaurantName == restaurantName).Select(r => r.restaurantId).ToList();
+            return ids;
+        }
 
         public List<RestaurantInfo> SortIdAscending()
         {

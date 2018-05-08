@@ -19,15 +19,51 @@ namespace DbFirst
         {
             this.ReviewerInfoes = new HashSet<ReviewerInfo>();
         }
-    
+
+        public RestaurantInfo(int restaurantId, string restaurantName, string city, string street, string description, string email)
+        {
+            this.restaurantId = restaurantId;
+            RestaurantName = restaurantName;
+            City = city;
+            Street = street;
+            Description = description;
+            Email = email;
+        }
+
         public int restaurantId { get; set; }
         public string RestaurantName { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string Description { get; set; }
         public string Email { get; set; }
-    
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReviewerInfo> ReviewerInfoes { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var info = obj as RestaurantInfo;
+            return info != null &&
+                   restaurantId == info.restaurantId &&
+                   RestaurantName == info.RestaurantName &&
+                   City == info.City &&
+                   Street == info.Street &&
+                   Description == info.Description &&
+                   Email == info.Email &&
+                   EqualityComparer<ICollection<ReviewerInfo>>.Default.Equals(ReviewerInfoes, info.ReviewerInfoes);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1488152542;
+            hashCode = hashCode * -1521134295 + restaurantId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(RestaurantName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(City);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Street);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ICollection<ReviewerInfo>>.Default.GetHashCode(ReviewerInfoes);
+            return hashCode;
+        }
     }
 }

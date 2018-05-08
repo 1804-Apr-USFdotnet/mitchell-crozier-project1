@@ -7,11 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace DbFirst
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class ReviewerInfo
     {
         public int reviewerId { get; set; }
@@ -19,7 +20,39 @@ namespace DbFirst
         public string ReviewerName { get; set; }
         public int Rating { get; set; }
         public System.DateTime Date { get; set; }
-    
+
+        public ReviewerInfo(int reviewerId, int restaurantId, string reviewerName, int rating, DateTime date)
+        {
+            this.reviewerId = reviewerId;
+            this.restaurantId = restaurantId;
+            ReviewerName = reviewerName;
+            Rating = rating;
+            Date = date;
+        }
+
         public virtual RestaurantInfo RestaurantInfo { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var info = obj as ReviewerInfo;
+            return info != null &&
+                   reviewerId == info.reviewerId &&
+                   restaurantId == info.restaurantId &&
+                   ReviewerName == info.ReviewerName &&
+                   Rating == info.Rating &&
+                   Date == info.Date;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1159705276;
+            hashCode = hashCode * -1521134295 + reviewerId.GetHashCode();
+            hashCode = hashCode * -1521134295 + restaurantId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ReviewerName);
+            hashCode = hashCode * -1521134295 + Rating.GetHashCode();
+            hashCode = hashCode * -1521134295 + Date.GetHashCode();
+            return hashCode;
+        }
     }
+
 }
