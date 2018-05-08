@@ -11,10 +11,10 @@ namespace RepositoryInterfaces
     {
         IQueryable<ReviewerInfo> getAll();
         ReviewerInfo GetReviewById(int revId);
-        void AddReview(ReviewerInfo review);
-        void DeleteReview(ReviewerInfo review);
-        void DeleteReviewById(int reviewId);
-        void UpdateReview(ReviewerInfo review);
+        bool AddReview(ReviewerInfo review);
+        bool DeleteReview(ReviewerInfo review);
+        bool DeleteReviewById(int reviewId);
+        bool UpdateReview(ReviewerInfo review);
 
     }
 }

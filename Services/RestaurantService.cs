@@ -79,8 +79,7 @@ namespace Services
 
         public List<int> ConvertNameIntoId(string restaurantName)
         {
-            var ids = restaurantRepository.getAll().Where(x => x.RestaurantName == restaurantName).Select(r => r.restaurantId).ToList();
-            return ids;
+            return restaurantRepository.ConvertNameIntoId(restaurantName);
         }
 
         public List<RestaurantInfo> SortIdAscending()

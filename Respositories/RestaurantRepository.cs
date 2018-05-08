@@ -30,11 +30,11 @@ namespace Respositories
             var restFind = _context.RestaurantInfoes.Find(restId);
             return rest;
         }
-//        public List<int> ConvertNameIntoId(string restaurantName)
-//        {
-//            var ids = _context.RestaurantInfoes.Where(x => x.RestaurantName == restaurantName).Select(r => r.restaurantId).ToList();
-//            return ids;
-//        }
+        public List<int> ConvertNameIntoId(string restaurantName)
+        {
+            var ids = _context.RestaurantInfoes.Where(x => x.RestaurantName == restaurantName).Select(r => r.restaurantId).ToList();
+            return ids;
+        }
 
         public bool AddRestaurant(RestaurantInfo restaurant)
         {

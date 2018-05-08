@@ -36,7 +36,7 @@ namespace Test
             List<int> restList = new List<int>();
             RestaurantInfo dummyRest = new RestaurantInfo(34, "repoTest", "test city", "test street", "descrip", "testemail");
             restList.Add(dummyRest.restaurantId);
-//            restRepo.Setup(i => i.).Returns(restList);
+            restRepo.Setup(i => i.ConvertNameIntoId("repoTest")).Returns(new List<int> {34});
             var service = new RestaurantService(restRepo.Object, reviewRepo.Object);
             var expected = restList;
             var actual = service.ConvertNameIntoId("repoTest");
@@ -95,6 +95,7 @@ namespace Test
 
             restRepo.Setup(i => i.GetRestaurantById(34)).Returns(new RestaurantInfo(34, "repoTest", "test city", "test street", "descrip", "testemail"));
             var expected = dummyRest;
+            
             var actual = service.GetRestaurantById(34);
             Assert.AreEqual(expected, actual, "Delete failed");
         }

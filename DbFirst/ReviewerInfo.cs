@@ -21,6 +21,10 @@ namespace DbFirst
         public int Rating { get; set; }
         public System.DateTime Date { get; set; }
 
+        public ReviewerInfo()
+        {
+
+        }
         public ReviewerInfo(int reviewerId, int restaurantId, string reviewerName, int rating, DateTime date)
         {
             this.reviewerId = reviewerId;

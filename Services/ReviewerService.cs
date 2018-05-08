@@ -36,24 +36,24 @@ namespace Services
             return _reviewRepository.GetReviewById(reviewId);
         }
 
-        public void AddReview(ReviewerInfo review)
+        public bool AddReview(ReviewerInfo review)
         {
-            _reviewRepository.AddReview(review);
+            return _reviewRepository.AddReview(review);
         }
 
-        public void DeleteReview(ReviewerInfo review)
+        public bool DeleteReview(ReviewerInfo review)
         {
-            _reviewRepository.DeleteReview(review);
+            return _reviewRepository.DeleteReview(review);
         }
 
-        public void DeleteReviewById(int reviewId)
+        public bool DeleteReviewById(int reviewId)
         {
-            _reviewRepository.DeleteReviewById(reviewId);
+            return _reviewRepository.DeleteReviewById(reviewId);
         }
 
-        public void UpdateReview(ReviewerInfo review)
+        public bool UpdateReview(ReviewerInfo review)
         {
-            _reviewRepository.UpdateReview(review);
+           return  _reviewRepository.UpdateReview(review);
         }
     }
 }

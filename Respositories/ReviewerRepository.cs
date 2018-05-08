@@ -29,33 +29,70 @@ namespace Respositories
             return reviewFind;
         }
 
-        public void AddReview(ReviewerInfo reviewer)
+        public bool AddReview(ReviewerInfo reviewer)
         {
-            _context.ReviewerInfoes.Add(reviewer);
-            _context.SaveChanges();
-        }
-
-        public void DeleteReview(ReviewerInfo reviewer)
-        {
-            _context.ReviewerInfoes.Remove(reviewer);
-            _context.SaveChanges();
-        }
-
-        public void DeleteReviewById(int reviewerId)
-        {
-            var review = GetReviewById(reviewerId);
-            _context.ReviewerInfoes.Remove(review);
-            _context.SaveChanges();
-        }
-
-        public void UpdateReview(ReviewerInfo reviewer)
-        {
-            var review = _context.ReviewerInfoes.Find(reviewer.reviewerId);
-            if (review != null)
+            try
             {
-                _context.Entry(review).CurrentValues.SetValues(reviewer);
+                _context.ReviewerInfoes.Add(reviewer);
                 _context.SaveChanges();
             }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool DeleteReview(ReviewerInfo reviewer)
+        {
+            try
+            {
+                _context.ReviewerInfoes.Remove(reviewer);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool DeleteReviewById(int reviewerId)
+        {
+            try
+            {
+                var review = GetReviewById(reviewerId);
+                _context.ReviewerInfoes.Remove(review);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool UpdateReview(ReviewerInfo reviewer)
+        {
+            try
+            {
+                var review = _context.ReviewerInfoes.Find(reviewer.reviewerId);
+                if (review != null)
+                {
+                    _context.Entry(review).CurrentValues.SetValues(reviewer);
+                    _context.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
