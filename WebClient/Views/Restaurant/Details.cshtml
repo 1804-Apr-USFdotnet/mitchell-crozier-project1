@@ -9,12 +9,14 @@
             <div class="card">
                 @Html.ActionLink("Delete", "Delete", new { id = Model.restaurantId }, htmlAttributes: new { @class = "btn btn-warning float-right" })
                 <div class="card-body">
-                    <h5 class="card-title">@Model.RestaurantName</h5>
+
+                    <h5 class="card-title">@Model.RestaurantName  @Html.ActionLink("View Reviews", "AllReviews", "Review", new { id = Model.restaurantId }, htmlAttributes: new { @class = "btn btn-success float-right" })</h5>
                     <p class="card-text">@Model.City</p>
+                    <p class="card-text">@Model.Street</p>
                     <p class="card-text">@Model.Description</p>
                     <p class="card-text">@Model.Email</p>
-                    @Html.ActionLink("Back", "Index", null, htmlAttributes: new { @class = "btn btn-secondary px-5 py-3" })
-                    @Html.ActionLink("Update", "Update", new {id = @Model.restaurantId}, htmlAttributes: new {@class = "btn btn-primary px-5 py-3 float-right" })
+                    @Html.ActionLink("Back", "Index", null, htmlAttributes: new {@class = "btn btn-secondary px-5 py-3"})
+                    @Html.ActionLink("Update", "Update", new {id = @Model.restaurantId}, htmlAttributes: new {@class = "btn btn-primary px-5 py-3 float-right"})
 
 
                 </div>

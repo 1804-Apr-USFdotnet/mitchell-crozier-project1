@@ -82,3 +82,5 @@ ReviewerInfoes
 2018-05-07 23:31:09.6246|INFO|Services.LoggingService|Created a new review with id: 104
 2018-05-08 03:23:33.9122|INFO|Services.LoggingService|Added restaurant with an id of: 103 and of name:S
 2018-05-08 03:25:51.6072|INFO|Services.LoggingService|Created a new review with id: 103
+2018-05-08 10:11:26.2783|INFO|Services.LoggingService|Added restaurant with an id of: 103 and of name:T
+2018-05-08 10:12:59.0823|INFO|Services.LoggingService|Created a new review with id: 103
