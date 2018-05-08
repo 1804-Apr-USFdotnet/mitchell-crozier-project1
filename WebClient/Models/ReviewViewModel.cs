@@ -11,7 +11,7 @@ namespace WebClient.Models
         public int reviewerId { get; set; }
         public int restaurantId { get; set; }
         public string ReviewerName { get; set; }
-        [Range(1,10, ErrorMessage = "Try again yo has to be within 1-10")]
+        [Range(1,10)]
         public int Rating { get; set; }
         public System.DateTime Date { get; set; }
     }

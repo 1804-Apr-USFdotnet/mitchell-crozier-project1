@@ -68,7 +68,7 @@ namespace WebClient.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ReviewerName,Rating, restaurantId")] ReviewerInfo reviewerInfo)
+        public ActionResult Create([Bind(Include = "ReviewerName,Rating, restaurantId")] ReviewViewModel reviewerInfo)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,8 @@ namespace WebClient.Controllers
                     reviewerInfo.reviewerId = newId;
                     reviewerInfo.Date = DateTime.Now;
                     var res = reviewerInfo.restaurantId;
-                    _reviewService.AddReview(reviewerInfo);
+                    var review = _mapper.Map<ReviewerInfo>(reviewerInfo);
+                    _reviewService.AddReview(review);
                     _loggingService.Log("Created a new review with id: " + reviewerInfo.restaurantId);
                     return RedirectToAction("AllReviews", new {id= reviewerInfo.restaurantId});
                 }
@@ -88,7 +89,7 @@ namespace WebClient.Controllers
                 }
             }
 
-            return RedirectToAction("AllReviews");
+            return RedirectToAction("AllReviews" ,reviewerInfo.restaurantId);
         }
 
         // GET: Review/Edit/5
