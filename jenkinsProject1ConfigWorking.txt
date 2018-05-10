@@ -1,0 +1,32 @@
+node('master'){
+    stage('import'){
+        git 'https://github.com/1804-Apr-USFdotnet/mitchell-crozier-project1.git'
+    }
+    stage('build'){
+        bat 'nuget restore'
+        bat 'msbuild'
+    }
+    stage('test'){
+        //bat "VSTest.Console Test\\bin\\Debug\\Test.dll"
+    }
+    stage('analyze'){
+        
+    }
+    stage('package'){
+        try{
+            dir('WebClient'){
+                bat 'msbuild  /t:package'
+            }
+        }catch(exc){
+            slackSend 'package failed'
+        }
+        
+        
+    }
+    stage('deploy'){
+        dir('WebClient/obj/Debug/Package'){
+            bat "\"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe\" -source:package='C:\\Program Files (x86)\\Jenkins\\workspace\\Project-1\\WebClient\\obj\\Debug\\Package\\WebClient.zip' -dest:auto,computerName=\"https://ec2-18-219-106-84.us-east-2.compute.amazonaws.com:8172/msdeploy.axd\",userName=\"Administrator\",password=\"${env.Deploy_Password}\",authtype=\"basic\",includeAcls=\"False\" -verb:sync -disableLink:AppPoolExtension -disableLink:ContentExtension -disableLink:CertificateExtension -setParamFile:\"C:\\Program Files (x86)\\Jenkins\\workspace\\Project-1\\WebClient\\obj\\Debug\\Package\\WebClient.SetParameters.xml\" -AllowUntrusted=True"        }
+        
+    }
+    
+}
