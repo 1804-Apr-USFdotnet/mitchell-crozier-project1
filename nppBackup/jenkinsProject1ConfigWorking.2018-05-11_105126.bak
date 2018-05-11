@@ -10,7 +10,6 @@ node('master'){
         //bat "VSTest.Console Test\\bin\\Debug\\Test.dll"
     }
     stage('analyze'){
-		bat 'msbuild /ver'
 		bat 'SonarScanner.MSBuild begin /k:mitchellcrozierproject1 /d:sonar.organization="mrcrozier-github" /v:0.1.0'
 		bat 'msbuild /t:rebuild'
 		bat 'SonarQube.Scanner.MSBuild end'
