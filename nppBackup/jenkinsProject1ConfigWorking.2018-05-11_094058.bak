@@ -4,7 +4,7 @@ node('master'){
     }
     stage('build'){
         bat 'nuget restore'
-        bat 'msbuild'
+        bat 'msbuild /p:MvcBuildViews=true'
     }
     stage('test'){
         //bat "VSTest.Console Test\\bin\\Debug\\Test.dll"
