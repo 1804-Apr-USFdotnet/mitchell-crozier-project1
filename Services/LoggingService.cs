@@ -14,7 +14,7 @@ namespace Services
         public LoggingService()
         {
             var config = new NLog.Config.LoggingConfiguration();
-            //comment for a commit change
+            //comment for a commit chang
             var logfile = new NLog.Targets.FileTarget() { FileName = "file.txt", Name = "logfile" };
             var logconsole = new NLog.Targets.ConsoleTarget() { Name = "logconsole" };
 
